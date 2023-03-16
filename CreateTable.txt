@@ -1,0 +1,42 @@
+CREATE TYPE behavior_type AS ENUM(
+    'aggressive',
+    'calm'
+
+    );
+CREATE TABLE human(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR(32) NOT NULL ,
+    age INT NOT NULL
+
+);
+CREATE TABLE rock(
+    id SERIAL PRIMARY KEY ,
+    height INT NOT NULL ,
+    color VARCHAR(32) NOT NULL
+
+);
+CREATE TABLE plant(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR(32) NOT NULL ,
+    id_rock INT REFERENCES rock(id) ON DELETE CASCADE
+);
+CREATE TABLE sound(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR(32) NOT NULL
+
+);
+CREATE TABLE dinosaur(
+    id SERIAL PRIMARY KEY ,
+    type VARCHAR(32) NOT NULL ,
+    behavior behavior_type,
+    id_sound INT REFERENCES sound(id) ON DELETE CASCADE
+);
+CREATE TABLE chase(
+    id_human INT REFERENCES human(id) ON DELETE CASCADE ,
+    id_dinosaur INT REFERENCES dinosaur(id) ON DELETE CASCADE
+
+);
+CREATE TABLE approximation(
+    id_human INT REFERENCES human(id) ON DELETE CASCADE ,
+    id_rock INT REFERENCES rock(id) ON DELETE CASCADE
+);

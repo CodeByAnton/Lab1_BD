@@ -1,0 +1,31 @@
+INSERT INTO human(name, age)
+VALUES ('Leksi',12),
+       ('Grant',15),
+       ('Tim',14);
+INSERT INTO rock(height, color)
+VALUES (120,'black'),
+       (100,'grey'),
+       (200,'black');
+INSERT INTO plant(name, id_rock)
+VALUES ('pine',2),
+       ('fir',1),
+       ('pine',1),
+       ('fir',2);
+INSERT INTO sound(name)
+VALUES ('rumble'),
+       ('noise');
+INSERT INTO dinosaur(type, behavior, id_sound)
+VALUES ('spinosaurs','aggressive',1),
+       ('brontosaurus','aggressive',1),
+       ('tyrannosaur','calm',2);
+INSERT INTO chase(id_human, id_dinosaur)
+VALUES (1,2),
+       (1,1),
+       (2,3),
+       (3,2),
+       (3,1);
+INSERT INTO approximation(id_human, id_rock)
+VALUES (1,2),
+       (1,3),
+       (2,3),
+       (3,1);
