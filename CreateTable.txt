@@ -1,42 +1,53 @@
-CREATE TYPE behavior_type AS ENUM(
-    'aggressive',
-    'calm'
-
-    );
+CREATE TABLE location(
+    id SERIAL PRIMARY KEY ,
+    type VARCHAR(32) NOT NULL
+);
 CREATE TABLE human(
     id SERIAL PRIMARY KEY ,
     name VARCHAR(32) NOT NULL ,
-    age INT NOT NULL
+    age INT NOT NULL,
+    location_id INT REFERENCES location(id) ON DELETE CASCADE
 
-);
-CREATE TABLE rock(
-    id SERIAL PRIMARY KEY ,
-    height INT NOT NULL ,
-    color VARCHAR(32) NOT NULL
 
 );
 CREATE TABLE plant(
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(32) NOT NULL ,
-    id_rock INT REFERENCES rock(id) ON DELETE CASCADE
+    type VARCHAR(32) NOT NULL
+
 );
+
+CREATE TABLE coordinate(
+    id SERIAL PRIMARY KEY,
+    x_coordinate INT NOT NULL,
+    y_coordinate INT NOT NULL,
+    location_id INT REFERENCES location(id) ON DELETE CASCADE
+);
+
 CREATE TABLE sound(
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(32) NOT NULL
+    type VARCHAR(32) NOT NULL
 
 );
 CREATE TABLE dinosaur(
     id SERIAL PRIMARY KEY ,
-    type VARCHAR(32) NOT NULL ,
-    behavior behavior_type,
-    id_sound INT REFERENCES sound(id) ON DELETE CASCADE
+    type VARCHAR(32) NOT NULL
 );
 CREATE TABLE chase(
-    id_human INT REFERENCES human(id) ON DELETE CASCADE ,
-    id_dinosaur INT REFERENCES dinosaur(id) ON DELETE CASCADE
+    human_id INT REFERENCES human(id) ON DELETE CASCADE ,
+    dinosaur_id INT REFERENCES dinosaur(id) ON DELETE CASCADE
 
 );
-CREATE TABLE approximation(
-    id_human INT REFERENCES human(id) ON DELETE CASCADE ,
-    id_rock INT REFERENCES rock(id) ON DELETE CASCADE
+
+CREATE TABLE communication(
+    human1_id INT REFERENCES human(id) ON DELETE CASCADE ,
+    human2_id INT REFERENCES human(id) ON DELETE CASCADE
+
+);
+CREATE TABLE location_has_plant(
+    location_id INT REFERENCES location(id) ON DELETE CASCADE,
+    plant_id INT REFERENCES plant(id) ON DELETE CASCADE
+);
+CREATE TABLE noise(
+    dinosaur_id INT REFERENCES dinosaur(id) ON DELETE CASCADE,
+    sound_id INT REFERENCES sound(id) ON DELETE CASCADE
 );

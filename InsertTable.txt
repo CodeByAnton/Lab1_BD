@@ -1,31 +1,39 @@
-INSERT INTO human(name, age)
-VALUES ('Leksi',12),
-       ('Grant',15),
-       ('Tim',14);
-INSERT INTO rock(height, color)
-VALUES (120,'black'),
-       (100,'grey'),
-       (200,'black');
-INSERT INTO plant(name, id_rock)
-VALUES ('pine',2),
-       ('fir',1),
-       ('pine',1),
-       ('fir',2);
-INSERT INTO sound(name)
+INSERT INTO location(type)
+VALUES ('rock'),
+       ('stone');
+INSERT INTO human(name, age, location_id)
+VALUES ('Leksi',12,1),
+       ('Grant',15,1),
+       ('Tim',14,2);
+INSERT INTO plant(type)
+VALUES ('pine'),
+       ('fir'),
+       ('fir');
+INSERT INTO coordinate(x_coordinate,y_coordinate,location_id)
+VALUES (12,14,1),
+       (111,11,2);
+INSERT INTO location_has_plant(location_id,plant_id)
+VALUES (1,1),
+       (1,2),
+       (2,3);
+INSERT INTO sound(type)
 VALUES ('rumble'),
        ('noise');
-INSERT INTO dinosaur(type, behavior, id_sound)
-VALUES ('spinosaurs','aggressive',1),
-       ('brontosaurus','aggressive',1),
-       ('tyrannosaur','calm',2);
-INSERT INTO chase(id_human, id_dinosaur)
+INSERT INTO dinosaur(type)
+VALUES ('spinosaurs'),
+       ('brontosaurus'),
+       ('tyrannosaur');
+INSERT INTO chase(human_id, dinosaur_id)
 VALUES (1,2),
        (1,1),
        (2,3),
        (3,2),
        (3,1);
-INSERT INTO approximation(id_human, id_rock)
+INSERT INTO communication (human1_id, human2_id)
 VALUES (1,2),
-       (1,3),
-       (2,3),
+	 (2,3),
+	 (3,1);
+INSERT INTO noise (dinosaur_id,sound_id)
+VALUES (1,2),
+       (2,2),
        (3,1);
